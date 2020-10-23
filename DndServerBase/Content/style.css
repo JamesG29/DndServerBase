@@ -1,0 +1,65 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    color: #222;
+    background-color: rgb(255, 255, 255);
+}
+
+.navbar {
+    padding: 0.8rem;
+}
+
+.navbar-nav li {
+    padding-right: 10px;
+}
+
+.nav-link {
+    font-size: 1.1em !important;
+}
+
+.wrapper {
+    margin: 0 auto;
+}
+
+.carousel-inner img {
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-caption-NPC {
+    position: absolute;
+    top: 50%;
+}
+/*Used to depict the div for the view all character button*/
+.carousel-caption-NPCbutton {
+    position: absolute;
+    top: -10px;
+    left: 66%;
+    transform: translateX(50%);
+}
+/*used to depict button associated wth view all character*/
+.btn-NPCbutton {
+    position: absolute;
+}
+
+
+.carousel-indicators li {
+    background-color: black;
+}
+
+.fun {
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.gif {
+    max-width: 100%;
+}

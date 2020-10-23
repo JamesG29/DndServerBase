@@ -1,0 +1,77 @@
+﻿@using System.Drawing
+@using DndServerBase.Models
+@using MySql.Data.MySqlClient
+@{
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+
+    MySqlTableModel curTable = MSDictionaries.MySqlTables["npcs"];
+    MySqlConnection connection = MSDictionaries.MySqlDataBaseConnections["dndserver"];
+
+    if (IsPost)
+    {
+        bool fullNameIsValid = true;
+        string charFullName = Request.Form["firstname"] +
+            Request.Form["middlename"] + Request.Form["lastname"];
+
+        /*
+        if (MySqlCRUD.IsFullNameTaken(connection, "npcfullname", charFullName))
+        {
+            fullNameIsValid = false;
+        }*/
+
+        if (fullNameIsValid)
+        {
+
+            //create a directory(folder) to store images related to the npc
+            //DirectoryInfo newFolderPath = new DirectoryInfo(@"C:\Users\James\source\repos\DndServerBase\DndServerBase\Content\img\" + charFullName);
+            //newFolderPath.Create();
+
+            List<string> insertVals = new List<string>()
+            {
+                "DEFAULT",
+                Request.Form["firstname"],
+                Request.Form["middlename"],
+                Request.Form["lastname"],
+                Request.Form["birthtown"],
+                Request.Form["biography"]
+
+            };
+
+            connection.Open();
+            MySqlCRUD.InsertRowDB(connection, curTable.table, curTable.collumns, insertVals);
+            connection.Close();
+        }
+
+    }
+}
+
+<div id="npcadderror"></div>
+<form id="addnpc" method="post">
+    <div>
+        <label for="firstname">First Name</label>
+        <input id="firstname" name="firstname" type="text" required/>
+    </div>
+    <div>
+        <label for="middlename">Middle Name</label>
+        <input id="middlename" name="middlename" type="text"  required/>
+    </div>
+    <div>
+        <label for="lastname">Last Name</label>
+        <input id="lastname" name="lastname" type="text"  required/>
+    </div>
+    <!--
+    <div>
+        <label for="image">Image</label>
+        <input id="image" name="image" type="image" />
+    </div>
+        -->
+    <div>
+        <label for="birthtown">Birth Town</label>
+        <input id="birthtown" name="birthtown" type="text"  required/>
+    </div>
+    <div>
+        <label for="shortbio">Short Biography</label>
+        <input id="shortbio" name="shortbio" type="text"  required/>
+    </div>
+    <button type="submit">Submit</button>
+</form>
