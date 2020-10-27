@@ -242,6 +242,7 @@
     <Content Include="Views\Npc\Index.cshtml" />
     <Content Include="Views\Npc\ListNpcs.cshtml" />
     <Content Include="Views\Shared\_BaseLayout.cshtml" />
+    <Content Include="Views\Home\NpcList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -11,20 +11,8 @@ namespace DndServerBase.Models
 {
     public class NpcList
     {
-        public List<NpcModel> Npcs = new List<NpcModel>();
+        public List<string>[] Npcs = new List<string>[5];
 
-        public void ResetList()
-        {
-            Npcs = new List<NpcModel>()
-            {
-                //enter no data
-            };
-        }
-
-        //here we will populate the list using our MySql database.
-        public void PopulateList()
-        {
-
-        }
+        
     }
 }

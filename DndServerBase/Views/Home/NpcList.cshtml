@@ -1,0 +1,40 @@
+﻿@using DndServerBase.Models
+@using MySql.Data.MySqlClient
+@{
+    ViewBag.Title = "NpcList";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+
+    MySqlTableModel curTable = MSDictionaries.npcsTable;
+    MySqlConnection connection = MSDictionaries.MySqlDataBaseConnections["dndserver"];
+
+    List<string> argsList = new List<string>()
+    {
+            "firstname",
+            "middlename",
+            "lastname",
+            "birthtown",
+            "shortbio"
+    };
+
+    //List<string>[] npcs = MySqlCRUD.SelectAllRowsDB(connection, curTable.table, argsList);
+
+    List<string>[] Npcs;
+    Npcs = MySqlCRUD.SelectAllRowsDB(connection, curTable.table, argsList);
+}
+
+<h2>NpcList</h2>
+<div>
+    @for(int i = 0; i < Npcs[0].Count; i++)
+    {
+    <div>
+        Character Info
+        <ul>
+            @foreach(var j in Npcs)
+            {
+                <li>@j[i]</li>
+            }
+        </ul>
+    </div>
+    }
+</div>
+

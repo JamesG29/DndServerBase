@@ -17,12 +17,21 @@ namespace DndServerBase.Models
 
         };
 
+        public static Dictionary<string, MySqlTableModel> MySqlTables = new Dictionary<string, MySqlTableModel>()
+        {
+            {"npcs", npcsTable},
+            {"npcsfullname", npcsFullnameTable}
+        };
+
+
+        //WHOGLAHUGHUETHI BORDER
+
         public static MySqlTableModel npcsTable = new MySqlTableModel()
         {
             server = "dndserver",
             table = "npcs",
             collumns = new List<string>{"NPCid", "Firstname", "Middlename", "Lastname",
-                            "Birthtown", "ShortBio"},
+                             "Image", "Birthtown", "ShortBio"},
             collumnAmt = 6
         };
 
@@ -34,10 +43,6 @@ namespace DndServerBase.Models
             collumnAmt = 2
         };
 
-        public static Dictionary<string, MySqlTableModel> MySqlTables = new Dictionary<string, MySqlTableModel>()
-        {
-            {"npcs", npcsTable},
-            {"npcsfullname", npcsFullnameTable}
-        };
+
     }
 }

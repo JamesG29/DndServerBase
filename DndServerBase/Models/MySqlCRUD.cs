@@ -9,7 +9,7 @@ using System.CodeDom;
 
 namespace DndServerBase.Models
 {
-    public class MySqlCRUD
+    public static class MySqlCRUD
     {
         private static bool OpenDBConnection(MySqlConnection connection)
         {
@@ -59,6 +59,7 @@ namespace DndServerBase.Models
         public static void InsertRowDB(MySqlConnection connection, string table,
                List<string> tableArgTypes, List<string> tableArgVals)
         {
+
            
             //tablrArgumentsString starts Empty
             string tableArgumentsString = "";
@@ -81,7 +82,7 @@ namespace DndServerBase.Models
             //add all values that will be inserted into the table
             for (int i = 0; i < tableArgVals.Count; i++)
             {
-                if (i == tableArgVals.Count - 1 && !(tableArgVals[i] == "Image" || tableArgVals[i] == "image"))
+                if (i == tableArgVals.Count - 1)
                 {
                     //The worlds DEFAULT and NULL are not strings and there for must not contain quotation marks
                     if (tableArgVals[i] == "DEFAULT" || tableArgVals[i] == "NULL")
@@ -92,10 +93,6 @@ namespace DndServerBase.Models
                     {
                         tableValuesString += $"'{tableArgVals[i]}'";
                     }
-                }
-                else if(tableArgVals[i] == "Image" || tableArgVals[i] == "image")
-                {
-
                 }
                 else
                 {
@@ -219,9 +216,18 @@ namespace DndServerBase.Models
                 CloseDBConnection(connection);
             }
         }
-    
+
+
         public static List<string>[] SelectAllRowsDB(MySqlConnection connection, string table, List<string> tableArgTypes)
         {
+            //tester filler table
+            List<string>[] fillertable = new List<string>[]
+            {
+                new List<string>(){"apple", "pineapple"},
+                new List<string>(){"beefjerky", "bacon"}
+            };
+
+            
             //create the query
             string query = $"SELECT * FROM {table}";
             //create temp list to eventually send as our actual return list
@@ -231,6 +237,7 @@ namespace DndServerBase.Models
                 templist[i] = new List<string>();
             }
 
+            
 
             if (OpenDBConnection(connection))
             {
@@ -258,7 +265,6 @@ namespace DndServerBase.Models
                 //return an empty array list
                 return templist;
             }
-
 
         }
     

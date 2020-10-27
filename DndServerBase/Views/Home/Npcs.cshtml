@@ -1,6 +1,9 @@
 ﻿@using System.Drawing
 @using DndServerBase.Models
 @using MySql.Data.MySqlClient
+@section headScripts{
+    <script defer src="Scripts/NpcAdding.js"></script>
+}
 @{
     Layout = "~/Views/Shared/_BaseLayout.cshtml";
 
@@ -27,16 +30,19 @@
             //newFolderPath.Create();
 
             List<string> insertVals = new List<string>()
-            {
+{
                 "DEFAULT",
                 Request.Form["firstname"],
                 Request.Form["middlename"],
                 Request.Form["lastname"],
+                //Request.Form[""] image URL(in reference to our local files)
+                "l",
                 Request.Form["birthtown"],
                 Request.Form["biography"]
 
             };
 
+            connection.Close();
             connection.Open();
             MySqlCRUD.InsertRowDB(connection, curTable.table, curTable.collumns, insertVals);
             connection.Close();
@@ -50,29 +56,29 @@
     Glob Shlat
     <div>
         <label for="firstname">First Name</label>
-        <input id="firstname" name="firstname" type="text" required/>
+        <input id="firstname" name="firstname" type="text" required />
     </div>
     <div>
         <label for="middlename">Middle Name</label>
-        <input id="middlename" name="middlename" type="text"  required/>
+        <input id="middlename" name="middlename" type="text" required />
     </div>
     <div>
         <label for="lastname">Last Name</label>
-        <input id="lastname" name="lastname" type="text"  required/>
+        <input id="lastname" name="lastname" type="text" required />
     </div>
-    <!--
     <div>
         <label for="image">Image</label>
-        <input id="image" name="image" type="image" />
+        <input id="image" name="image" type="image" required />
     </div>
-        -->
     <div>
         <label for="birthtown">Birth Town</label>
-        <input id="birthtown" name="birthtown" type="text"  required/>
+        <input id="birthtown" name="birthtown" type="text" required />
     </div>
     <div>
         <label for="shortbio">Short Biography</label>
-        <input id="shortbio" name="shortbio" type="text"  required/>
+        <input id="shortbio" name="shortbio" type="text" required />
     </div>
     <button type="submit">Submit</button>
 </form>
+
+
