@@ -271,11 +271,11 @@ namespace DndServerBase.Models
         public static bool IsFullNameTaken(MySqlConnection connection, string table, string fullname)
         {
             //create query
-            string query = $"SELECT  FROM {table}";
+            string query = $"SELECT * FROM {table}";
 
             if (OpenDBConnection(connection))
             {
-                Console.WriteLine("once");
+                
                 //create a mysqlcommand to send the query through and then read through the query data
                 MySqlCommand cmd = new MySqlCommand(query, connection);
                 MySqlDataReader dataRead = cmd.ExecuteReader();

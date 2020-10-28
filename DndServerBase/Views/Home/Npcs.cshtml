@@ -16,11 +16,11 @@
         string charFullName = Request.Form["firstname"] +
             Request.Form["middlename"] + Request.Form["lastname"];
 
-        /*
+        connection.Close();
         if (MySqlCRUD.IsFullNameTaken(connection, "npcfullname", charFullName))
         {
             fullNameIsValid = false;
-        }*/
+        }
 
         if (fullNameIsValid)
         {
@@ -38,13 +38,26 @@
                 //Request.Form[""] image URL(in reference to our local files)
                 "l",
                 Request.Form["birthtown"],
-                Request.Form["biography"]
+                Request.Form["shortbio"]
 
+            };
+
+            //the values for the fullname table
+            List<string> insertValsFullTable = new List<string>()
+            {
+                "DEFAULT",
+                charFullName
             };
 
             connection.Close();
             connection.Open();
-            MySqlCRUD.InsertRowDB(connection, curTable.table, curTable.collumns, insertVals);
+            MySqlCRUD.InsertRowDB(connection, MSDictionaries.npcsTable.table, MSDictionaries.npcsTable.collumns, insertVals);
+
+            connection.Close();
+            connection.Open();
+            MySqlCRUD.InsertRowDB(connection, MSDictionaries.npcsFullnameTable.table,
+                MSDictionaries.npcsFullnameTable.collumns, insertValsFullTable);
+
             connection.Close();
         }
 

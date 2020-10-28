@@ -32,7 +32,7 @@ namespace DndServerBase.Models
             table = "npcs",
             collumns = new List<string>{"NPCid", "Firstname", "Middlename", "Lastname",
                              "Image", "Birthtown", "ShortBio"},
-            collumnAmt = 6
+            collumnAmt = 7
         };
 
         public static MySqlTableModel npcsFullnameTable = new MySqlTableModel()
